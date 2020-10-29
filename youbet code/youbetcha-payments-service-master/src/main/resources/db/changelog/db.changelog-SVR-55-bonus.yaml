@@ -1,0 +1,142 @@
+databaseChangeLog:
+  - changeSet:
+      id: svr55-1
+      author: tomfin
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - createTable:
+            tableName: deposit_bonus
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: activation_date
+                  type: timestamp
+                  constraints:
+                    nullable: true
+              - column:
+                  name: expiration_date
+                  type: timestamp
+                  constraints:
+                    nullable: true
+              - column:
+                  name: enabled
+                  type: tinyint(1)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: internal_description
+                  type: varchar(1000)
+                  constraints:
+              - column:
+                  name: translation_keyword
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: promo_image
+                  type: varchar(1000)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_by
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created_date
+                  type: timestamp
+                  defaultValueComputed: current_timestamp
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: bonus_country
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: bonus_id
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: country_code
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: bonus_user
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: bonus_id
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: svr55-2
+      author: tomfin
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - renameColumn:
+            newColumnName:  title_keyword
+            oldColumnName:  translation_keyword
+            columnDataType: varchar(255)
+            tableName:  deposit_bonus
+        - addColumn:
+            tableName: deposit_bonus
+            columns:
+              - column:
+                  name: description_keyword
+                  type: varchar(255)
+              - column:
+                  name: terms_keyword
+                  type: varchar(255)
+              - column:
+                  name: currency_code
+                  type: varchar(10)
+              - column:
+                  name: min_bonus
+                  type: int
+              - column:
+                  name: max_bonus
+                  type: int
+
+  - changeSet:
+      id: svr55-3
+      author: tomfin
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - renameColumn:
+            newColumnName:  bonus_amount
+            oldColumnName:  currency_code
+            columnDataType: varchar(10)
+            tableName:  deposit_bonus
+

@@ -1,0 +1,53 @@
+server:
+  port: 17601
+  servlet:
+    context-path: /gaming-service
+  jetty:
+    acceptors: 50 # Number of acceptor threads to use.
+    max-http-post-size: 100000 # Maximum size in bytes of the HTTP post or put content.
+    selectors: 50 # Number of selector threads to use.
+    connection-idle-timeout: 60000
+
+spring:
+  application:
+    name: youbetcha-gaming-service-staging
+  datasource:
+    url: jdbc:mariadb://internal-api-stg.youbetcha.com:3306/gamingdb
+    driverClassName: org.mariadb.jdbc.Driver
+    username: gaming_service
+    password: gaming2login
+    jpa:
+      database-platform: org.hibernate.dialect.MariaDB103Dialect
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+everymatrix:
+  server-api:
+    host-name: https://core-gm-stage.everymatrix.com
+    version: 1.0
+    partner-id: 2207YoubetchaSiteID
+    partner-key: K54vNGEk94g9AgTQ
+  casino-engine:
+    host-name: http://casino2.stage.everymatrix.com
+    operator-key: youbetcha_com
+  game-launch:
+    host-name: https://gamelaunch-stage.everymatrix.com/Loader/Start
+    domain-id: 2207
+
+management:
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    org.hibernate.SQL: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: INFO
+
+rest:
+  api:
+    user: test
+    password: test
+
+

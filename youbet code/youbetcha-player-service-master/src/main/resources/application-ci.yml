@@ -1,0 +1,42 @@
+server:
+  port: 17500
+  servlet:
+    context-path: /player-service
+  jetty:
+    acceptors: 50 # Number of acceptor threads to use.
+    max-http-post-size: 100000 # Maximum size in bytes of the HTTP post or put content.
+    selectors: 50 # Number of selector threads to use.
+    connection-idle-timeout: 60000
+
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: kafka
+          defaultBrokerPort: 9093
+  application:
+    name: youbetcha-player-service-ci
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=FALSE;IFEXISTS=FALSE
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+
+service:
+  host: https://be1.youbetcha.com
+
+everymatrix:
+  casino-engine:
+    host-name: http://casino2.stage.everymatrix.com
+    operator-key: youbetcha_com
+
+management:
+  endpoint:
+    health:
+      show-details: always

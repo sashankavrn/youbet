@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  youbetcha-gaming-service-staging:
+    image: internal-api-stg.youbetcha.com:5000/youbetcha-gaming-service:${APP_VERSION}
+    container_name: youbetcha-gaming-service-staging
+    restart: unless-stopped
+    volumes:
+      - /opt/app/youbetcha/youbetcha-gaming-service/logs:/logs
+    environment:
+      - "SPRING_DATASOURCE_URL=jdbc:mariadb://internal-api-stg.youbetcha.com:3306/gamingdb?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&characterEncoding=UTF-8"
+      - "SPRING_DATASOURCE_USERNAME=gaming_service"
+      - "SPRING_DATASOURCE_PASSWORD=gaming2login"
+      - "JAVA_OPTS=-Xmx1024m -Xms128m"
+      - "spring.profiles.active=staging"
+      - "LOGS_FILENAME=gaming-service-logger-staging"
+    ports:
+      - 17601:17601

@@ -1,0 +1,33 @@
+everymatrix:
+  server-api:
+    host-name: https://core-gm-stage.everymatrix.com
+    version: 1.0
+    partner-id: 2207YoubetchaSiteID
+    partner-key: K54vNGEk94g9AgTQ
+  casino-engine:
+    host-name: http://casino2.stage.everymatrix.com
+    operator-key: 2207YoubetchaSiteID
+  game-launch:
+    host-name: https://gamelaunch-stage.everymatrix.com/Loader/Start
+    domain-id: 2207YoubetchaSiteID
+
+kafka:
+  broker: "kafka:9093"
+  topic: registration-ci
+
+spring:
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=FALSE;IFEXISTS=FALSE
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+
+rest:
+  api:
+    user: test
+    password: test

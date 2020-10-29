@@ -1,0 +1,233 @@
+{
+  "domainID": 2207,
+  "type": "game",
+  "action": "update",
+  "id": 7766,
+  "seq": 0,
+  "data": {
+    "id": 7766,
+    "slug": "bobby-7s",
+    "vendor": "Microgaming",
+    "vendorID": 108,
+    "contentProvider": "Microgaming",
+    "originalVendor": "Microgaming",
+    "gameCode": "MGS_Bobby7s",
+    "gameBundleID": "bobby7s_microgaming",
+    "gameID": "Bobby7sFlash",
+    "categories": [
+      "VIDEOSLOTS"
+    ],
+    "tags": [
+      "5-reel-slots",
+      "25-line-slots",
+      "nextgen"
+    ],
+    "enabled": true,
+    "operatorVisible": true,
+    "theoreticalPayOut": 0.9515,
+    "thirdPartyFee": 0,
+    "fpp": 0.2,
+    "restrictedTerritories": [
+      "AE",
+      "AF",
+      "AR",
+      "BA",
+      "BD",
+      "BG",
+      "BH",
+      "BS",
+      "BY",
+      "CA",
+      "CD",
+      "CI",
+      "CN",
+      "CU",
+      "CY",
+      "EE",
+      "EG",
+      "ER",
+      "FJ",
+      "HK",
+      "HT",
+      "IL",
+      "IN",
+      "IQ",
+      "IR",
+      "JO",
+      "KE",
+      "KG",
+      "KP",
+      "KW",
+      "KZ",
+      "LB",
+      "LK",
+      "LR",
+      "LT",
+      "LY",
+      "MM",
+      "MZ",
+      "NG",
+      "PK",
+      "PS",
+      "QA",
+      "RE",
+      "RU",
+      "RW",
+      "SA",
+      "SD",
+      "SE",
+      "SG",
+      "SN",
+      "SO",
+      "SY",
+      "TR",
+      "TZ",
+      "UA",
+      "VA",
+      "VE",
+      "VN",
+      "YE",
+      "ZW",
+      "AS",
+      "BE",
+      "DK",
+      "FR",
+      "GU",
+      "IT",
+      "MP",
+      "PR",
+      "ZA",
+      "ES",
+      "US",
+      "UM",
+      "VI",
+      "PH",
+      "AQ",
+      "AN",
+      "AU",
+      "CR",
+      "NL"
+    ],
+    "languages": [
+      "en"
+    ],
+    "currencies": [],
+    "url": "https://gamelaunch-stage.everymatrix.com/Loader/Start/2207/bobby-7s",
+    "helpUrl": "",
+    "creation": {
+      "time": "2012-05-09T14:50:03.7200000Z",
+      "lastModified": "2019-11-22T20:03:18.1503906Z",
+      "universalID": "",
+      "lastModifiedUniversalID": "iryna.ishchuk@everymatrix.com"
+    },
+    "property": {
+      "width": 1024,
+      "height": 768,
+      "license": "Curacao",
+      "defaultCoin": 0,
+      "terminal": [
+        "PC"
+      ],
+      "jurisdictions": [
+        "Curacao",
+        "UK"
+      ],
+      "freeSpin": {
+        "support": false,
+        "supportFeatureBonus": false
+      },
+      "hitFrequency": {
+        "min": 0,
+        "max": 0
+      },
+      "launchGameInHtml5": false,
+      "ageLimit": false
+    },
+    "report": {
+      "category": "VIDEOSLOTS",
+      "invoicingGroup": "STANDARDPRICING"
+    },
+    "popularity": {
+      "coefficient": 1.0,
+      "ranking": 0.0
+    },
+    "playMode": {
+      "fun": true,
+      "anonymity": true,
+      "realMoney": true
+    },
+    "bonus": {
+      "contribution": 1,
+      "overridable": true,
+      "excluded": false
+    },
+    "presentation": {
+      "gameName": {
+        "*": "Bobby 7s"
+      },
+      "shortName": {
+        "*": "Bobby 7s"
+      },
+      "description": {
+        "*": "Bobby 7’s™ is a hilarious 25-payline, 5-reel slot that’s jam-packed with features and fun! Its loony law and order UK style, with blundering Bobbies and bungling Burglars. Designed to offer the variety and fast paced action that UK gamers crave, Bobby 7’s combines classic slot game play with an entire suite of exciting Fruit Machine style features.\r\n"
+      },
+      "thumbnail": {
+        "*": "//static.everymatrix.com/cms2/_casino/B/B3C8371F0D45073868DB4244829DF007.jpg"
+      },
+      "thumbnails": {
+        "*": [
+          {
+            "index": 0,
+            "url": "//static.everymatrix.com/cms2/_casino/B/B3C8371F0D45073868DB4244829DF007.jpg"
+          }
+        ]
+      },
+      "logo": {
+        "*": "//static.everymatrix.com/cms2/base/_casino/7/73D51A67834C4E936CCFC7AE0EBA562E.optimized.png"
+      },
+      "backgroundImage": {
+        "*": "//static.everymatrix.com/cms2/base/_casino/3/30B7BE0E6431CFC8269B406AC1580B14.jpg"
+      },
+      "backgroundImage2": {},
+      "iconFormat": {
+        "*": "//static.everymatrix.com/cms2/base/_casino/B/B3C8371F0D45073868DB4244829DF007.jpg"
+      },
+      "icons": {
+        "114": {
+          "*": "//static.everymatrix.com/cms2/base/_casino/B/B3C8371F0D45073868DB4244829DF007.jpg"
+        },
+        "88": {
+          "*": "//static.everymatrix.com/cms2/base/_casino/B/B3C8371F0D45073868DB4244829DF007.jpg"
+        },
+        "72": {
+          "*": "//static.everymatrix.com/cms2/base/_casino/B/B3C8371F0D45073868DB4244829DF007.jpg"
+        },
+        "57": {
+          "*": "//static.everymatrix.com/cms2/base/_casino/B/B3C8371F0D45073868DB4244829DF007.jpg"
+        },
+        "44": {
+          "*": "//static.everymatrix.com/cms2/base/_casino/B/B3C8371F0D45073868DB4244829DF007.jpg"
+        },
+        "22": {
+          "*": "//static.everymatrix.com/cms2/base/_casino/B/B3C8371F0D45073868DB4244829DF007.jpg"
+        }
+      }
+    },
+    "maintenanceWindows": [],
+    "topPrize": 0,
+    "ruleUrl": {},
+    "vendorLimits": {},
+    "additional": {
+      "highStake": {
+        "displayName": "High Stake",
+        "value": false
+      },
+      "fullScreen": {
+        "displayName": "Full Screen",
+        "value": false
+      }
+    },
+    "hash": 4499966752304186379,
+    "hash2": 95451082412640878
+  }
+}

@@ -1,0 +1,64 @@
+server:
+  port: 17702
+  servlet:
+    context-path: /payments-service
+  jetty:
+    acceptors: 50 # Number of acceptor threads to use.
+    max-http-post-size: 100000 # Maximum size in bytes of the HTTP post or put content.
+    selectors: 50 # Number of selector threads to use.
+    connection-idle-timeout: 60000
+
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: internal-api.youbetcha.com
+          defaultBrokerPort: 9092
+          producerProperties:
+            acks: all
+            client.id: clientid-1
+            enable:
+              idempotence: true
+          consumerProperties:
+            isolation.level: read_committed
+            enable:
+              auto:
+                commit: false
+  application:
+    name: youbetcha-payments-service-prod
+  datasource:
+    url: jdbc:mariadb://db-prod.youbetcha.com:3306/paymentsdb
+    driverClassName: org.mariadb.jdbc.Driver
+    username: payments_service
+    password: payments2login
+  jpa:
+    database-platform: org.hibernate.dialect.MariaDB103Dialect
+
+service:
+  host: https://youbetcha.com
+
+internal:
+  player-service:
+    host-name: internal-api.youbetcha.com
+    port: 17502
+    context: player-service
+
+everymatrix:
+  merchant:
+    id: 2195
+    key: EC8A68B83AC14417AB286C771C6126F3
+  server-api:
+    host-name: https://admin3.gammatrix.com
+    version: 1.0
+    partner-id: 2195YoubetchaSiteID
+    partner-key: SLLRynVwt249cCpP
+  money-matrix:
+    host-name: https://api.moneymatrix.com/api/v1/Hosted
+    callback-url: https://api.youbetcha.com/payments-service/external-api/v1/payments/transaction/status/change
+    check-status-url: https://api.youbetcha.com/payments-service/external-api/v1/payments/transaction/status/check
+
+management:
+  endpoint:
+    health:
+      show-details: always

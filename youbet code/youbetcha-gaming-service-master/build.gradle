@@ -1,0 +1,96 @@
+buildscript {
+    ext {
+        springBootVersion = '2.3.0.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "gradle.plugin.com.gorylenko.gradle-git-properties:gradle-git-properties:2.2.2"
+        classpath 'net.researchgate:gradle-release:2.8.1'
+    }
+}
+
+configurations {
+    compile.exclude module: "spring-boot-starter-tomcat"
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'jacoco'
+apply plugin: 'net.researchgate.release'
+//apply plugin: "com.gorylenko.gradle-git-properties"
+
+group = 'com.youbetcha'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+springBoot {
+    buildInfo()
+}
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    developmentOnly('org.springframework.boot:spring-boot-devtools')
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-jetty'
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile("org.springframework.boot:spring-boot-starter-security")
+    compile 'io.springfox:springfox-swagger2:2.9.2'
+    compile 'io.springfox:springfox-swagger-ui:2.9.2'
+    compile('mysql:mysql-connector-java:8.0.13')
+    compile 'com.squareup.okhttp3:okhttp:4.7.2'
+    compile 'com.squareup.okhttp3:logging-interceptor:4.7.2'
+    compile 'com.google.code.gson:gson:2.8.5'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.10'
+    compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+
+    compile 'io.jsonwebtoken:jjwt-api:0.11.2'
+    runtime 'io.jsonwebtoken:jjwt-impl:0.11.2',
+            // Uncomment the next line if you want to use RSASSA-PSS (PS256, PS384, PS512) algorithms:
+            //'org.bouncycastle:bcprov-jdk15on:1.60',
+            'io.jsonwebtoken:jjwt-jackson:0.11.2' // or 'io.jsonwebtoken:jjwt-gson:0.11.2' for gson
+
+    compile('org.liquibase:liquibase-core')
+    compile 'com.h2database:h2:1.4.199'
+
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+    compile 'org.mariadb.jdbc:mariadb-java-client:2.6.2'
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.12'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    compile 'org.springframework.kafka:spring-kafka'
+}
+
+task releaseVersion {
+    doLast {
+        Properties props = new Properties()
+        File propsFile = new File('gradle.properties')
+        props.load(propsFile.newDataInputStream())
+        def stable_project_version = props.getProperty('version') as String
+        def (major, minor, patch) = stable_project_version.tokenize('.')
+        patch = String.valueOf(patch.toInteger() + 1)
+        String snapshot_project_version = major + '.' + minor + '.' + patch
+        props.setProperty('version', snapshot_project_version)
+        props.store(propsFile.newWriter(), null)
+        println(snapshot_project_version)
+    }
+}

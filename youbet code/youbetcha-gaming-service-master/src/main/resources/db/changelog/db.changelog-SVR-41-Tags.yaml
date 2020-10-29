@@ -1,0 +1,83 @@
+databaseChangeLog:
+  - changeSet:
+      id: SVR-41-1
+      author: rpydi
+      changes:
+        - createTable:
+            tableName: tag
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: enabled
+                  type: boolean
+                  constraints:
+                    nullable: true
+
+  - changeSet:
+      id: SVR-41-2
+      author: rpydi
+      changes:
+        - createTable:
+            tableName: game_tag
+            columns:
+              - column:
+                  name: game_id
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tag_id
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: SVR-41-3
+      author: tomfin
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: key_word
+                  type: varchar(255)
+            tableName: tag
+        - addColumn:
+            columns:
+              - column:
+                  name: order_number
+                  type: int
+            tableName: tag
+
+  - changeSet:
+      id: SVR-41-4
+      author: tomfin
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: country_code
+                  type: varchar(10)
+            tableName: tag
+
+  - changeSet:
+      id: SVR-41-5
+      author: tomfin
+      dbms: 'mysql, mariadb'
+      changes:
+        - modifyDataType:
+            tableName: tag
+            columnName: enabled
+            newDataType: tinyint(1)

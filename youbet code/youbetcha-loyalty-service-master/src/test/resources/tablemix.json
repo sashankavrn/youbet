@@ -1,0 +1,158 @@
+{
+  "domainID": 2207,
+  "type": "table",
+  "action": "update",
+  "id": 8340032560,
+  "seq": 0,
+  "data": {
+    "id": 8340032560,
+    "category": "POKER",
+    "enabled": true,
+    "operatorVisible": true,
+    "isOpen": true,
+    "url": "https://gamelaunch-stage.everymatrix.com/Loader/Start/2207/three-card-poker-evo/?tableID=8340032560",
+    "creation": {
+      "time": "2016-10-11T09:32:56.1172119Z",
+      "lastModified": "2018-11-17T21:43:34.6918944",
+      "newGameExpiryTime": "2015-05-27T00:00:00.0000000Z"
+    },
+    "property": {
+      "terminal": [
+        "iPad",
+        "iPhone",
+        "Android"
+      ],
+      "isVIPTable": false,
+      "excludeFromRandomLaunch": false,
+      "isTurkishTable": false,
+      "dealerLanguage": "",
+      "isBetBehindAvailable": false,
+      "isSeatsUnlimited": false,
+      "dealerGender": "NotFixed",
+      "dealerOrigin": "NotFixed",
+      "limits": {
+        "EUR": {
+          "min": 1,
+          "max": 3000
+        },
+        "USD": {
+          "min": 1,
+          "max": 3000
+        },
+        "GBP": {
+          "min": 1,
+          "max": 3000
+        },
+        "DKK": {
+          "min": 10,
+          "max": 30000
+        },
+        "NOK": {
+          "min": 10,
+          "max": 30000
+        },
+        "SEK": {
+          "min": 10,
+          "max": 30000
+        },
+        "TRY": {
+          "min": 2,
+          "max": 6000
+        }
+      },
+      "evolutionGamingType": "tcp",
+      "evolutionGamingInterface": "hd1",
+      "evolutionGamingTableID": "n5emwq5c5dwepwam",
+      "evolutionGamingVirtualTableID": "nut45a59pt59s6m9",
+      "width": 1920,
+      "height": 1080,
+      "license": "Curacao"
+    },
+    "openingTime": {
+      "is24HoursOpen": true
+    },
+    "presentation": {
+      "tableName": {
+        "*": "Three Card Poker"
+      },
+      "thumbnail": {
+        "*": "//static.everymatrix.com/cms2/base/_casino/4/476B769000F5259C3712602792074929.jpg"
+      },
+      "shortName": {
+        "*": "Three Card Poker"
+      },
+      "description": {
+        "*": "Three Card Poker is the most popular live casino specialty table game of all time. Please confirm to you account manager if you wish to pay this live table on an additional fee of  3% of GGR generated."
+      },
+      "logo": {
+        "*": "//static.everymatrix.com/cms2/base/_casino/3/36BE24AF7E6A5A32EE5EE9BE86EDCCA2.optimized.png"
+      },
+      "backgroundImage": {},
+      "thumbnails": {
+        "*": [
+          {
+            "index": 0,
+            "url": "//static.everymatrix.com/cms2/base/_casino/3/389EC03C1ADA0E77A63344D74E69082A.jpg"
+          }
+        ]
+      }
+    },
+    "popularity": {
+      "ranking": 0.0
+    },
+    "maintenanceWindows": [],
+    "additional": {
+      "highStake": {
+        "displayName": "High Stake",
+        "value": false
+      },
+      "fullScreen": {
+        "displayName": "Full Screen",
+        "value": false
+      }
+    },
+    "gameID": 8620,
+    "slug": "three-card-poker-evo",
+    "vendor": "EvolutionGaming",
+    "vendorID": 128,
+    "gameCode": "n5emwq5c5dwepwam",
+    "gameBundleID": "threecardpoker_evolutiongaming",
+    "vendorGameID": "106",
+    "contentProvider": "Evolution Gaming",
+    "originalVendor": "EvolutionGaming",
+    "categories": [
+      "LIVEDEALER"
+    ],
+    "tags": [],
+    "restrictedTerritories": [
+      "AS",
+      "GU",
+      "MP",
+      "PR",
+      "US",
+      "UM",
+      "VI",
+      "AN",
+      "NL"
+    ],
+    "theoreticalPayOut": 0.9663,
+    "thirdPartyFee": 0,
+    "fpp": 0.01,
+    "playMode": {
+      "fun": false,
+      "anonymity": false,
+      "realMoney": true
+    },
+    "bonus": {
+      "contribution": 0.01,
+      "overridable": false,
+      "excluded": false
+    },
+    "report": {
+      "category": "LIVEDEALER",
+      "invoicingGroup": "PREMIUMTABLE"
+    },
+    "hash": 10427826639417799799,
+    "hash2": 5057222530659594287
+  }
+}

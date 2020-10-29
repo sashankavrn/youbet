@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - changeSet:
+      id: svr51-1
+      author: aegan
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - addColumn:
+            tableName: login_fail
+            columns:
+              - column:
+                  name: created_date
+                  type: timestamp
+                  defaultValueComputed: current_timestamp
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: svr51-2
+      author: aegan
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - dropForeignKeyConstraint:
+            baseTableName:  login
+            constraintName:  fk_constraint_error_data_login
+
+  - changeSet:
+      id: svr51-3
+      author: aegan
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+       - dropTable:
+          cascadeConstraints:  true
+          tableName:  error_data_error_details
+
+  - changeSet:
+      id: svr51-4
+      author: aegan
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - dropTable:
+            cascadeConstraints:  true
+            tableName:  error_details
+
+  - changeSet:
+      id: svr51-5
+      author: aegan
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - dropTable:
+            cascadeConstraints:  true
+            tableName:  error_data
+
+  - changeSet:
+      id: svr51-6
+      author: aegan
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - dropColumn:
+            columns:
+              - column:
+                  name: error_data_id
+              - column:
+                  name: version
+            tableName:  login

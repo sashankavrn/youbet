@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  youbetcha-payments-service:
+    image: internal-api.youbetcha.com:5000/youbetcha-payments-service:${APP_VERSION}
+    container_name: youbetcha-payments-service
+    restart: always
+    volumes:
+      - /opt/app/youbetcha/youbetcha-payments-service/logs:/logs
+    ports:
+      - 17700:17700
+

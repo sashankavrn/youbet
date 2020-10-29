@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  youbetcha-gaming-service-prod:
+    image: docker.youbetcha.com:5000/youbetcha-gaming-service:${APP_VERSION}
+    container_name: youbetcha-gaming-service-prod
+    restart: unless-stopped
+    volumes:
+      - /opt/app/youbetcha/youbetcha-gaming-service/logs:/logs
+    environment:
+      - "SPRING_DATASOURCE_URL=jdbc:mariadb://db-prod.youbetcha.com:3306/gamingdb?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&characterEncoding=UTF-8"
+      - "SPRING_DATASOURCE_USERNAME=gaming_service"
+      - "SPRING_DATASOURCE_PASSWORD=gaming2login"
+      - "JAVA_OPTS=-Xmx1024m -Xms128m"
+      - "spring.profiles.active=prod"
+      - "LOGS_FILENAME=gaming-service-logger-prod"
+    ports:
+      - 17602:17602
+
+networks:
+  default:
+    external:
+      name: prod

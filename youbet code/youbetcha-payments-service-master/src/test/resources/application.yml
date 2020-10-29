@@ -1,0 +1,36 @@
+everymatrix:
+  merchant:
+    key: 1
+    id: id
+  server-api:
+    host-name: https://core-gm-stage.everymatrix.com
+    version: 1.0
+    partner-id: 2207YoubetchaSiteID
+    partner-key: K54vNGEk94g9AgTQ
+  money-matrix:
+    host-name: https://api-release.moneymatrix.com/api/v1/Hosted/
+    callback-url: https://be1.youbetcha.com
+    check-status-url: https://be1.youbetcha.com
+
+service:
+  host: localhost
+
+internal:
+  player-service:
+    host-name: localhost
+    port: 17500
+    context: player-service
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=FALSE;IFEXISTS=FALSE
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect

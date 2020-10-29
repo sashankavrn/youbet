@@ -1,0 +1,67 @@
+databaseChangeLog:
+  - changeSet:
+      id: svr21-1
+      author: aegan
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        renameColumn:
+          newColumnName:  PHONE_CODE
+          oldColumnName:  code
+          columnDataType: varchar(5)
+          tableName:  country
+
+  - changeSet:
+      id: svr21-2
+      author: aegan
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        addColumn:
+          tableName: country
+          columns:
+            column: 
+              name : active
+              type: boolean
+              constraints:
+                nullable: false
+              defaultValue: false
+
+  - changeSet:
+      id:  svr21-3
+      author:  aegan
+      dbms: "h2,  mysql,  mariadb"
+      changes:
+        - sql:
+            sql: >
+              UPDATE country SET active = 1 WHERE name = 'Antigua and Barbuda';
+              UPDATE country SET active = 1 WHERE name = 'Argentina';
+              UPDATE country SET active = 1 WHERE name = 'Aruba';
+              UPDATE country SET active = 1 WHERE name = 'Barbados';
+              UPDATE country SET active = 1 WHERE name = 'Belize';
+              UPDATE country SET active = 1 WHERE name = 'Bolivia';
+              UPDATE country SET active = 1 WHERE name = 'Brazil';
+              UPDATE country SET active = 1 WHERE name = 'Chile';
+              UPDATE country SET active = 1 WHERE name = 'Columbia';
+              UPDATE country SET active = 1 WHERE name = 'Costa Rica';
+              UPDATE country SET active = 1 WHERE name = 'Cuba';
+              UPDATE country SET active = 1 WHERE name = 'Dominica';
+              UPDATE country SET active = 1 WHERE name = 'Dominican Republic';
+              UPDATE country SET active = 1 WHERE name = 'Equador';
+              UPDATE country SET active = 1 WHERE name = 'El Salvador';
+              UPDATE country SET active = 1 WHERE name = 'Grenada';
+              UPDATE country SET active = 1 WHERE name = 'Guatemala';
+              UPDATE country SET active = 1 WHERE name = 'Guyana';
+              UPDATE country SET active = 1 WHERE name = 'Haiti';
+              UPDATE country SET active = 1 WHERE name = 'Honduras';
+              UPDATE country SET active = 1 WHERE name = 'Jamaica';
+              UPDATE country SET active = 1 WHERE name = 'Mexico';
+              UPDATE country SET active = 1 WHERE name = 'Nicaragua';
+              UPDATE country SET active = 1 WHERE name = 'Panama';
+              UPDATE country SET active = 1 WHERE name = 'Paraguay';
+              UPDATE country SET active = 1 WHERE name = 'Peru';
+              UPDATE country SET active = 1 WHERE name = 'Saint Kitts And Nevis';
+              UPDATE country SET active = 1 WHERE name = 'Saint Lucia';
+              UPDATE country SET active = 1 WHERE name = 'Saint Vincent And The Grenadines';
+              UPDATE country SET active = 1 WHERE name = 'Suriname';
+              UPDATE country SET active = 1 WHERE name = 'Trinidad and Tobago';
+              UPDATE country SET active = 1 WHERE name = 'Uruguay';
+              UPDATE country SET active = 1 WHERE name = 'Venezuela';

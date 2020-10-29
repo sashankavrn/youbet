@@ -1,0 +1,24 @@
+databaseChangeLog:
+   - changeSet:
+      id: svr39-4
+      author: tomfin
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - addColumn:
+            tableName: register
+            columns:
+              - column:
+                  name: deposit_count
+                  type: int
+                  constraints:
+                    nullable: true
+                  defaultValue: 0
+        - addColumn:
+            tableName: register
+            columns:
+              - column:
+                  name: withdraw_count
+                  type: int
+                  constraints:
+                    nullable: true
+                  defaultValue: 0

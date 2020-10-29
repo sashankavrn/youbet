@@ -1,0 +1,250 @@
+databaseChangeLog:
+  - changeSet:
+      id: svr39-1
+      author: mwlodarkiewicz
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - createTable:
+            tableName: transaction
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: transaction_type
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: reference
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: signature
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: transaction_code
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_by
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created_date
+                  type: timestamp
+                  defaultValueComputed: current_timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ip
+                  type: varchar(15)
+                  constraints:
+                    nullable: true
+  - changeSet:
+      id: svr39-2
+      author: mwlodarkiewicz
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: request_id
+                  type: varchar(50)
+            tableName: transaction
+  - changeSet:
+      id: svr39-3
+      author: mwlodarkiewicz
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - renameColumn:
+            newColumnName:  merchant_reference
+            oldColumnName:  reference
+            columnDataType: varchar(255)
+            tableName:  transaction
+  - changeSet:
+      id: svr39-4
+      author: mwlodarkiewicz
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: player_id
+                  type: int
+            tableName: transaction
+  - changeSet:
+      id: svr39-5
+      author: tomfin
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: amount
+                  type: int
+            tableName: transaction
+  - changeSet:
+      id: svr39-6
+      author: tomfin
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: provider_response
+                  type: text(65535)
+            tableName: transaction
+  - changeSet:
+      id: svr39-7
+      author: tomfin
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - dropNotNullConstraint:
+            tableName: transaction
+            columnName: signature
+            columnDataType: varchar(255)
+        - dropNotNullConstraint:
+            tableName: transaction
+            columnName: transaction_code
+            columnDataType: varchar(255)
+  - changeSet:
+      id: svr39-8
+      author: mwlodarkiewicz
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - renameColumn:
+            newColumnName:  transaction_stage
+            oldColumnName:  transaction_type
+            columnDataType: varchar(255)
+            tableName:  transaction
+        - modifyDataType:
+            columnName:  amount
+            newDataType:  decimal
+            tableName:  transaction
+  - changeSet:
+      id: svr39-9
+      author: mwlodarkiewicz
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: transaction_type
+                  type: varchar(50)
+            tableName: transaction
+  - changeSet:
+      id: svr39-10
+      author: tomfin
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: retry_time
+                  type: timestamp
+                  constraints:
+                    nullable: true
+            tableName: transaction
+  - changeSet:
+      id: svr39-11
+      author: tomfin
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: retry_count
+                  type: int
+                  defaultValue: 0
+            tableName: transaction
+  - changeSet:
+      id: svr39-12
+      author: tomfin
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - createTable:
+            tableName: player_mapping
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: key_value
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: payload
+                  type: text(65535)
+                  constraints:
+                    nullable: true
+        - createTable:
+            tableName: account_mapping
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: key_value
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: payload
+                  type: text(65535)
+                  constraints:
+                    nullable: true
+  - changeSet:
+      id: svr39-13
+      author: tomfin
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - modifyDataType:
+            columnName: created_date
+            newDataType: datetime
+            tableName: transaction
+
+  - changeSet:
+      id: svr39-14
+      author: tomfin
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: code
+                  type: varchar(255)
+            tableName: transaction
+
+  - changeSet:
+      id: svr39-15
+      author: tomfin
+      dbms:  'mysql,  mariadb'
+      changes:
+        - modifyDataType:
+            columnName: created_date
+            newDataType: datetime(6)
+            tableName: transaction

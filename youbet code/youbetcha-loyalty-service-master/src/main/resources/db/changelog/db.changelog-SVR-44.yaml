@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: SVR-44-1
+      author: aegan
+      changes:
+        - createTable:
+            tableName: bonus
+            columns:
+              - column:
+                  name: ID
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false

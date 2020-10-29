@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  youbetcha-player-service-ci:
+    image: youbetcha/youbetcha-player-service:latest
+    container_name: youbetcha-player-service-ci
+    restart: unless-stopped
+    volumes:
+      - /tmp/app/logs:/logs
+    environment:
+      - "JAVA_OPTS=-Xmx256m -Xms128m"
+      - "spring.profiles.active=ci"
+      - "LOGS_FILENAME=player-service-logger-ci"
+      - "SPRING_KAFKA_BOOTSTRAPSERVERS=kafka:9093"
+    ports:
+      - 17500:17500
+
+networks:
+  default:
+    external:
+      name: ci
+

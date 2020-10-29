@@ -1,0 +1,53 @@
+server:
+  port: 17610
+  servlet:
+    context-path: /loyalty-service
+  jetty:
+    acceptors: 50 # Number of acceptor threads to use.
+    max-http-post-size: 100000 # Maximum size in bytes of the HTTP post or put content.
+    selectors: 50 # Number of selector threads to use.
+    idle-timeout: 120
+spring:
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=FALSE;IFEXISTS=FALSE
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+
+everymatrix:
+  acs:
+    host-name: https://acs-external-stage.everymatrix.com
+    username: youbetcha_appuser
+    password: V_6a}NY<!?)yE4r=
+  ubs:
+    host-name: http://ubs.stage.everymatrix.com/
+  server-api:
+    host-name: https://core-gm-stage.everymatrix.com
+    version: 1
+    partner-id: someid
+    partner-key: somekey
+  casino-engine:
+    host-name: http://casino2.dev.everymatrix.com
+  game-launch:
+    host-name: https://gamelaunch-dev.everymatrix.com/Loader/Start
+    domain-id: 2207
+
+kafka:
+  broker: "kafka:9093"
+  topic: registration-ci
+  consumer-group: consumerGroupLocal
+
+management:
+  info:
+    git:
+      mode: full
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE

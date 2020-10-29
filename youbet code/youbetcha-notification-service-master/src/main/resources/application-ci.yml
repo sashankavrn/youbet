@@ -1,0 +1,45 @@
+server:
+  port: 17510
+  servlet:
+    context-path: /player-notification-service
+  jetty:
+    acceptors: 50 # Number of acceptor threads to use.
+    max-http-post-size: 100000 # Maximum size in bytes of the HTTP post or put content.
+    selectors: 50 # Number of selector threads to use.
+spring.mail:
+  host: smtp.gmail.com
+  port: 587
+  protocol: smtp
+  test-connection: false
+  username: youbetcha@googlemail.com
+  password: password
+  properties:
+    mail:
+      smtp:
+        auth: true
+        starttls:
+          enable: true
+
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: kafka
+          defaultBrokerPort: 9093
+  application:
+    name: youbetcha-notification-service-ci
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=FALSE;IFEXISTS=FALSE
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+
+sib:
+  url: https://api.sendinblue.com/v3/smtp/email
+  api-key: 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

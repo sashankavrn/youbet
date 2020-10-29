@@ -1,0 +1,318 @@
+databaseChangeLog:
+  - changeSet:
+      id: SVR-40-1
+      author: aegan
+      changes:
+        - createTable:
+            tableName: em_game
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: data_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: slug
+                  type: varchar(500)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: game_name
+                  type: varchar(200)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: enabled
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: game_id
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: categories
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tags
+                  type: varchar(100)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: popularity
+                  type: float
+                  constraints:
+                    nullable: true
+              - column:
+                  name: game_properties
+                  type: varchar(2048)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: restricted_territories
+                  type: varchar(1024)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: terminal
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: updated_ts
+                  type: timestamp
+                  constraints:
+                    nullable: true
+
+  - changeSet:
+      id: SVR-40-2
+      author: aegan
+      changes:
+        - createTable:
+            tableName: em_table
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: table_id
+                  type: long
+                  constraints:
+                    nullable: false
+              - column:
+                  name: slug
+                  type: varchar(500)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: table_name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: game_id
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: category
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: categories
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_open
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: enabled
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: restricted_territories
+                  type: varchar(1024)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: table_properties
+                  type: varchar(2048)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: terminal
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: updated_ts
+                  type: timestamp
+                  constraints:
+                    nullable: true
+  - changeSet:
+      id: SVR-40-4
+      author: aegan
+      changes:
+        - createTable:
+            tableName: game
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: data_id
+                  type: long
+                  constraints:
+                    nullable: false
+              - column:
+                  name: slug
+                  type: varchar(500)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: game_id
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: game_name
+                  type: varchar(200)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: category
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: restricted_territories
+                  type: varchar(1024)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: game_properties
+                  type: varchar(2048)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: terminal
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: country_code
+                  type: varchar(10)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: is_open
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: enabled
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_new
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_jackpot
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_hot
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_exclusive
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_ts
+                  type: timestamp
+                  constraints:
+                    nullable: true
+  - changeSet:
+      id: SVR-40-5
+      author: aegan
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  descending: true
+                  name: category
+            indexName: idx_category
+            tableName: game
+
+  - changeSet:
+      id: SVR-40-6
+      author: tomfin
+      changes:
+      - sql:
+          comment: Converting em_game game_name to utf8mb4
+          dbms: '!h2, mariadb'
+          sql: alter table em_game modify game_name varchar(200) character set 'utf8mb4' collate 'utf8mb4_unicode_ci';
+      - sql:
+          comment: Converting em_table table_name to utf8mb4
+          dbms: '!h2, mariadb'
+          sql: alter table em_table modify table_name varchar(200) character set 'utf8mb4' collate 'utf8mb4_unicode_ci';
+      - sql:
+          comment: Converting game game_name to utf8mb4
+          dbms: '!h2, mariadb'
+          sql: alter table game modify game_name varchar(200) character set 'utf8mb4' collate 'utf8mb4_unicode_ci';
+
+  - changeSet:
+      id: SVR-40-7
+      dbms: 'mariadb, mysql'
+      author: tomfin
+      changes:
+        - modifyDataType:
+            tableName: em_game
+            columnName: enabled
+            newDataType: tinyint(1)
+        - modifyDataType:
+            tableName: em_table
+            columnName: enabled
+            newDataType: tinyint(1)
+        - modifyDataType:
+            tableName: em_table
+            columnName: is_open
+            newDataType: tinyint(1)
+        - modifyDataType:
+            tableName: game
+            columnName: enabled
+            newDataType: tinyint(1)
+        - modifyDataType:
+            tableName: game
+            columnName: is_open
+            newDataType: tinyint(1)
+        - modifyDataType:
+            tableName: game
+            columnName: is_new
+            newDataType: tinyint(1)
+        - modifyDataType:
+            tableName: game
+            columnName: is_hot
+            newDataType: tinyint(1)
+        - modifyDataType:
+            tableName: game
+            columnName: is_exclusive
+            newDataType: tinyint(1)
+        - modifyDataType:
+            tableName: game
+            columnName: is_jackpot
+            newDataType: tinyint(1)
+
+
+
+

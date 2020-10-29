@@ -1,0 +1,273 @@
+databaseChangeLog:
+  - changeSet:
+      id: svr15-1
+      author: aegan
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - createTable:
+            tableName: currency
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(3)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: active
+                  type: boolean
+                  constraints:
+                    nullable: false
+                  defaultValue: true
+              - column:
+                  name: created
+                  type: timestamp
+                  defaultValueComputed: current_timestamp
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: svr15-2
+      author: aegan
+      comment: "Reference data for countries"
+      changes:
+        - insert:
+            tableName: currency
+            columns:
+              - column:
+                  name: code
+                  value: "EUR"
+              - column:
+                  name: description
+                  value: "Euro"
+        - insert:
+            tableName: currency
+            columns:
+              - column:
+                  name: code
+                  value: "USD"
+              - column:
+                  name: description
+                  value: "US Dollar"
+        - insert:
+            tableName: currency
+            columns:
+              - column:
+                  name: code
+                  value: "GBP"
+              - column:
+                  name: description
+                  value: "Pound Sterling"
+        - insert:
+            tableName: currency
+            columns:
+              - column:
+                  name: code
+                  value: "CNY"
+              - column:
+                  name: description
+                  value: "Chinese Yuan"
+        - insert:
+            tableName: currency
+            columns:
+              - column:
+                  name: code
+                  value: "CZK"
+              - column:
+                  name: description
+                  value: "Czech Koruna"
+        - insert:
+            tableName: currency
+            columns:
+              - column:
+                  name: code
+                  value: "DKK"
+              - column:
+                  name: description
+                  value: "Danish Krone"
+        - insert:
+            tableName: currency
+            columns:
+              - column:
+                  name: code
+                  value: "NOK"
+              - column:
+                  name: description
+                  value: "Norwegian Krone"
+        - insert:
+            tableName: currency
+            columns:
+              - column:
+                  name: code
+                  value: "PLN"
+              - column:
+                  name: description
+                  value: "Polish Zloty"
+        - insert:
+            tableName: currency
+            columns:
+              - column:
+                  name: code
+                  value: "RUB"
+              - column:
+                  name: description
+                  value: "Russian Ruble"
+        - insert:
+            tableName: currency
+            columns:
+              - column:
+                  name: code
+                  value: "SEK"
+              - column:
+                  name: description
+                  value: "Swedish Krona"
+        - insert:
+            tableName: currency
+            columns:
+              - column:
+                  name: code
+                  value: "ZAR"
+              - column:
+                  name: description
+                  value: "South African Rand"
+        - insert:
+            tableName: currency
+            columns:
+              - column:
+                  name: code
+                  value: "CAD"
+              - column:
+                  name: description
+                  value: "Canadian Dollar"
+        - insert:
+            tableName: currency
+            columns:
+              - column:
+                  name: code
+                  value: "AUD"
+              - column:
+                  name: description
+                  value: "Australian Dollar"
+        - insert:
+            tableName: currency
+            columns:
+              - column:
+                  name: code
+                  value: "BGN"
+              - column:
+                  name: description
+                  value: "Bulgarian Lev"
+        - insert:
+            tableName: currency
+            columns:
+              - column:
+                  name: code
+                  value: "GEL"
+              - column:
+                  name: description
+                  value: "Georgian Lari"
+        - insert:
+            tableName: currency
+            columns:
+              - column:
+                  name: code
+                  value: "MXN"
+              - column:
+                  name: description
+                  value: "Mexican Peso"
+        - insert:
+            tableName: currency
+            columns:
+              - column:
+                  name: code
+                  value: "NGC"
+              - column:
+                  name: description
+                  value: "Nigerian Naira"
+        - insert:
+            tableName: currency
+            columns:
+              - column:
+                  name: code
+                  value: "RON"
+              - column:
+                  name: description
+                  value: "Romanian Leu"
+        - insert:
+            tableName: currency
+            columns:
+              - column:
+                  name: code
+                  value: "TRY"
+              - column:
+                  name: description
+                  value: "Turkish Lira"
+        - insert:
+            tableName: currency
+            columns:
+              - column:
+                  name: code
+                  value: "VEF"
+              - column:
+                  name: description
+                  value: "Venezuelan Bolivar"
+        - insert:
+            tableName: currency
+            columns:
+              - column:
+                  name: code
+                  value: "HRK"
+              - column:
+                  name: description
+                  value: "Croatia Krune"
+        - insert:
+            tableName: currency
+            columns:
+              - column:
+                  name: code
+                  value: "HUF"
+              - column:
+                  name: description
+                  value: "Hungarian Florint"
+        - insert:
+            tableName: currency
+            columns:
+              - column:
+                  name: code
+                  value: "PEN"
+              - column:
+                  name: description
+                  value: "Peruvian Nuevo Sol"
+  - changeSet:
+      id:  svr15-3
+      author:  mwlodarkiewicz
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - delete:
+            tableName: currency
+        - sql:
+            sql: >
+              INSERT INTO currency (code, description, active) VALUES ('EUR','Euro',true);
+              INSERT INTO currency (code, description, active) VALUES ('USD','US Dollar',true);
+              INSERT INTO currency (code, description, active) VALUES ('INR','Indian Rupee',true);
+              INSERT INTO currency (code, description, active) VALUES ('CAD','Canadian Dollar',true);
+              INSERT INTO currency (code, description, active) VALUES ('NZD','New Zealand Dollar',true);
+              INSERT INTO currency (code, description, active) VALUES ('JPY','Japanese Yen',true);
+              INSERT INTO currency (code, description, active) VALUES ('MXN','Mexican Peso',true);
+              INSERT INTO currency (code, description, active) VALUES ('ARS','Argentinian Peso',true);
+              INSERT INTO currency (code, description, active) VALUES ('CLP','Chilean Peso',true);
+              INSERT INTO currency (code, description, active) VALUES ('BRL','Brazilian Real',true);
+              INSERT INTO currency (code, description, active) VALUES ('THB','Thai Bhat',true);
+              INSERT INTO currency (code, description, active) VALUES ('KRW','Korean Won',true);
+              INSERT INTO currency (code, description, active) VALUES ('LKR','Sri Lankan Rupee',true);

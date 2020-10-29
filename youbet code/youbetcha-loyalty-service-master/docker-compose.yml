@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  youbetcha-loyalty-service:
+    image: localhost:5000/youbetcha-loyalty-service:${APP_VERSION}
+    container_name: youbetcha-loyalty-service
+    restart: always
+    volumes:
+      - ./logs:/usr/src/app/logs
+    ports:
+      - 17610:17610
+

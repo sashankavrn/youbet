@@ -1,0 +1,29 @@
+package com.youbetcha.model;
+
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import javax.persistence.EntityListeners;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.util.Date;
+
+@Getter
+@Setter
+@MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
+@EqualsAndHashCode(callSuper = false)
+public abstract class Auditable<U> {
+
+    @CreatedBy
+    protected U createdBy;
+
+    @CreatedDate
+    @Temporal(TemporalType.TIMESTAMP)
+    protected Date createdDate;
+}

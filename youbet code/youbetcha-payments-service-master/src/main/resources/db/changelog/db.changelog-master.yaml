@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/db.changelog-SVR-39-payments.yaml
+  - include:
+      file: db/changelog/db.changelog-SVR-55-bonus.yaml

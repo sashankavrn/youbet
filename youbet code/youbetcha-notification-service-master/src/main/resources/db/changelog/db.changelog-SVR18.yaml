@@ -1,0 +1,56 @@
+databaseChangeLog:
+  - changeSet:
+      id: svr18-1
+      author: mwlodarkiewicz
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - createTable:
+            tableName: push_notification
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: email_address
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: seen
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: in_app
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sms
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: content
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: timestamp
+                  constraints:
+                    nullable: true
+              - column:
+                  name: last_modified_date
+                  type: timestamp
+                  constraints:
+                    nullable: true

@@ -1,0 +1,40 @@
+server:
+  port: 17502
+  servlet:
+    context-path: /player-service
+  jetty:
+    acceptors: 50 # Number of acceptor threads to use.
+    max-http-post-size: 100000 # Maximum size in bytes of the HTTP post or put content.
+    selectors: 50 # Number of selector threads to use.
+    connection-idle-timeout: 60000
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: internal-api.youbetcha.com
+          defaultBrokerPort: 9092
+  application:
+    name: youbetcha-player-service-prod
+  datasource:
+    url: jdbc:mariadb://db-prod.youbetcha.com:3306/playerdb
+    driverClassName: org.mariadb.jdbc.Driver
+    username: player_service
+    password: player2login
+  jpa:
+    database-platform: org.hibernate.dialect.MariaDB103Dialect
+service:
+  host: https://youbetcha.com
+everymatrix:
+  merchant:
+    id: 2195
+    key: FF6669994ACE4B3993985F85DB0F5ED6
+  server-api:
+    host-name: https://admin3.gammatrix.com
+    version: 1.0
+    partner-id: 2195YoubetchaSiteID
+    partner-key: SLLRynVwt249cCpP
+management:
+  endpoint:
+    health:
+      show-details: always

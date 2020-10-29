@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  youbetcha-gaming-service-ci:
+    image: youbetcha/youbetcha-gaming-service:latest
+    container_name: youbetcha-gaming-service-ci
+    restart: unless-stopped
+    volumes:
+      - /tmp/app/logs:/logs
+    environment:
+      - "JAVA_OPTS=-Xmx256m -Xms128m"
+      - "spring.profiles.active=ci"
+      - "LOGS_FILENAME=gaming-service-logger-ci"
+    ports:
+      - 17600:17600
+
+networks:
+  default:
+    external:
+      name: ci
+

@@ -1,0 +1,88 @@
+databaseChangeLog:
+  - changeSet:
+      id: svr42-1
+      author: mwlodarkiewicz
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - createTable:
+            tableName: MESSAGES
+            columns:
+              - column:
+                  name: ID
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: EMAIL
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: STATUS
+                  type: varchar(1)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: CREATED_TS
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: UPDATED_TS
+                  type: timestamp
+                  constraints:
+                    nullable: true
+  - changeSet:
+      id: svr42-2
+      author: mwlodarkiewicz
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - dropTable:
+            - tableName: MESSAGES
+        - createTable:
+            tableName: message
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: seen
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: content
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: timestamp
+                  constraints:
+                    nullable: true
+              - column:
+                  name: last_modified_date
+                  type: timestamp
+                  constraints:
+                    nullable: true
+
+  - changeSet:
+      id: SVR-42-3
+      dbms: 'mariadb, mysql'
+      author: tomfin
+      changes:
+        - modifyDataType:
+            tableName: message
+            columnName: seen
+            newDataType: tinyint(1)

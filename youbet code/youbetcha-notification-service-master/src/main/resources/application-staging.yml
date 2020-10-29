@@ -1,0 +1,53 @@
+server:
+  port: 17901
+  servlet:
+    context-path: /player-notification-service
+  jetty:
+    acceptors: 50 # Number of acceptor threads to use.
+    max-http-post-size: 100000 # Maximum size in bytes of the HTTP post or put content.
+    selectors: 50 # Number of selector threads to use.
+
+spring.mail:
+  host: smtp.gmail.com
+  port: 587
+  protocol: smtp
+  test-connection: false
+  username: youbetcha@googlemail.com
+  password: password
+  properties:
+    mail:
+      smtp:
+        auth: true
+        starttls:
+          enable: true
+
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: internal-api-stg.youbetcha.com
+          defaultBrokerPort: 9092
+  application:
+    name: youbetcha-notification-service-staging
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:mariadb://db-test.youbetcha.com:3306/notificationdb
+    driverClassName: org.mariadb.jdbc.Driver
+    username: notification_service
+    password: notification2login
+    jpa:
+      database-platform: org.hibernate.dialect.MariaDB103Dialect
+
+sib:
+  contact-url: https://api.sendinblue.com/v3/contacts
+  url: https://api.sendinblue.com/v3/smtp/email
+  api-key: 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
+
+internal:
+  player-service:
+    host-name: internal-api-stg.youbetcha.com
+    port: 17501
+    context: player-service

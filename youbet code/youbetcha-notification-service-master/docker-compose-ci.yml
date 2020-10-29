@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  youbetcha-notification-service-ci:
+    image: youbetcha/youbetcha-notification-service:latest
+    container_name: youbetcha-notification-service-ci
+    restart: always
+    volumes:
+      - ./logs:/usr/src/app/logs
+    environment:
+      - "JAVA_OPTS=-Xmx256m -Xms128m"
+      - "spring.profiles.active=ci"
+      - "LOGS_FILENAME=player-notification-service-logger-ci"
+      - "SPRING_KAFKA_BOOTSTRAPSERVERS=kafka:9093"
+    ports:
+      - 17510:17510
+
+networks:
+  default:
+    external:
+      name: ci

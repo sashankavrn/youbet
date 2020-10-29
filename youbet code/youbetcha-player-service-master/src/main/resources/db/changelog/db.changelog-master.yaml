@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/db.changelog-SVR-1.yaml
+  - include:
+      file: db/changelog/db.changelog-SVR15-currencies.yaml
+  - include:
+      file: db/changelog/db.changelog-SVR17-countries.yaml
+  - include:
+      file: db/changelog/db.changelog-SVR5-staging-player.yaml
+  - include:
+      file: db/changelog/db.changelog-SVR21-countriesactive.yaml
+  - include:
+      file: db/changelog/db.changelog-SVR20-languages.yaml
+  - include:
+      file: db/changelog/db.changelog-SVR39-payments.yaml
+  - include:
+      file: db/changelog/db.changelog-SVR46-activation.yaml
+  - include:
+      file: db/changelog/db.changelog-SVR51-cleanup.yaml

@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  youbetcha-player-service:
+    image: internal-api.youbetcha.com:5000/youbetcha-player-service:${APP_VERSION}
+    container_name: youbetcha-player-service
+    restart: always
+    volumes:
+      - /opt/app/youbetcha/youbetcha-player-service/logs:/logs
+    ports:
+      - 17500:17500
+

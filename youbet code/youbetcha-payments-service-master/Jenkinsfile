@@ -1,0 +1,180 @@
+pipeline {
+    agent any
+
+    environment {
+        registryUrl = "http://localhost:5000"
+        registry = "localhost:5000/youbetcha-payments-service"
+        serviceName = "youbetcha-payments-service"
+        dockerImage = ''
+        currentTag = sh(returnStdout:  true, script: "git describe --tags --abbrev=0").trim()
+    }
+    options {
+		  // only keep 25 builds to prevent disk usage from growing out of control
+		  buildDiscarder(
+		    logRotator(
+		      artifactDaysToKeepStr: '', 
+		      artifactNumToKeepStr: '', 
+		      daysToKeepStr: '', 
+		      numToKeepStr: '25',
+    		)
+  		)
+	}
+
+    //triggers {
+       //cron('H */8 * * *') //regular builds
+       //pollSCM('* * * * *') //polling for changes, here once a minute
+    //}
+
+    stages {
+//        stage('Checkout') {
+//                steps {
+//                    git branch: 'master', credentialsId: 'tomfin/github', url: 'https://github.com/tomfin/youbetcha-payments-service.git/'
+//                }
+//        }
+
+        stage('Compile') {
+            steps {
+                gradlew('clean', 'classes', 'testClasses')
+                gradlew('compileJava')
+            }
+        }
+
+        stage('Unit Tests') {
+            steps {
+                gradlew('test', 'jacocoTestReport')
+            }
+            post {
+                always {
+                    junit '**/build/test-results/test/TEST-*.xml'
+                    step([
+                           $class           : 'JacocoPublisher',
+                           execPattern      : 'build/jacoco/test.exec',
+                           classPattern     : 'build/classes/java/main',
+                           sourcePattern    : 'src/main/java',
+                           exclusionPattern : '**/*Test.class'
+                    ])
+                }
+            }
+        }
+
+        stage('Build Docker image') {
+            when {
+               not {
+                   buildingTag()
+                }
+            }
+            steps {
+                sh 'docker build -t youbetcha/youbetcha-payments-service:latest .'
+             }
+        }
+
+        stage('Build Tagged Docker image') {
+            when {
+               buildingTag()
+            }
+            steps {
+                script {
+                    //versionTag = sh(returnStdout:  true, script: "git describe --tags --abbrev=0").trim()
+                    dockerImage = docker.build serviceName + ":" + currentTag
+                }
+            }
+        }
+
+        stage('Push Docker image') {
+            when {
+               buildingTag()
+            }
+            steps {
+                script {
+                    docker.withRegistry( registryUrl ) {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
+
+//        stage('docker-compose kafka, run if non-existent') {
+//             steps {
+//                  sh "docker-compose -f docker-compose-kafka.yml rm -sfv"
+//                  sleep time: 5, unit: 'SECONDS'
+//                  sh 'docker-compose -f docker-compose-kafka.yml up -d --force-recreate'
+//             }
+//         }
+
+        stage('docker-compose CI stop and remove') {
+             when {
+                 not {
+                     buildingTag()
+                }
+             }
+             steps {
+                 script {
+                     catchError {
+                     def inspect = sh script: "docker container inspect -f '{{.State.Running}}' youbetcha-payments-service-ci", returnStatus: false
+                     if(true) {
+                        sh "docker kill youbetcha-payments-service-ci"
+                        sleep time: 5, unit: 'SECONDS'
+                        sh "docker rm -fv youbetcha-payments-service-ci"
+                     }
+                     }
+                 }
+             }
+         }
+
+//         stage('docker-compose Staging stop and remove') {
+//             when {
+//                 buildingTag()
+//                }
+//             steps {
+//                 script {
+//                 catchError {
+//                      def inspect = sh script: "docker container inspect -f '{{.State.Running}}' youbetcha-payments-service-staging", returnStatus: false
+//                      if(true) {
+//                         sh "docker kill youbetcha-payments-service-staging"
+//                         sleep time: 5, unit: 'SECONDS'
+//                         sh "docker rm -fv youbetcha-payments-service-staging"
+//                      }
+//                  }
+//                  }
+//             }
+//         }
+
+        stage('Docker compose CI start up') {
+             when {
+                not {
+                    buildingTag()
+               }
+            }
+            steps {
+                 sh 'docker-compose -f docker-compose-ci.yml rm -sfv'
+                 sh 'docker-compose -f docker-compose-ci.yml up -d youbetcha-payments-service-ci'
+            }
+        }
+
+        stage('Deploy to Staging') {
+            when {
+                buildingTag()
+            }
+            steps {
+                script {
+            		def out = sh script: "/opt/app/youbetcha/youbetcha-payments-service/deploy.sh ${currentTag} 1", returnStdout: true
+            		println("Deploy Out: ${out}")
+                }
+//                sh 'docker-compose -f docker-compose-staging.yml rm -sfv'
+//                sh 'docker-compose -f docker-compose-staging.yml up -d youbetcha-payments-service-staging'
+            }
+        }
+    }
+   post {
+      success {
+         slackSend channel: "#jenkins", message: "<Build success - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)>"
+      }
+      failure {
+         slackSend channel: "#jenkins", message: "<You done fucked up - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)>"
+      }
+   }
+}
+
+def gradlew(String... args) {
+    sh "./gradlew ${args.join(' ')} -s"
+}

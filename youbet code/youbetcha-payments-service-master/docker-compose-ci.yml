@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  youbetcha-payments-service-ci:
+    image: youbetcha/youbetcha-payments-service:latest
+    container_name: youbetcha-payments-service-ci
+    restart: unless-stopped
+    volumes:
+      - /tmp/app/logs:/logs
+    environment:
+      - "JAVA_OPTS=-Xmx256m -Xms128m"
+      - "spring.profiles.active=ci"
+      - "LOGS_FILENAME=payments-service-logger-ci"
+      - "SPRING_KAFKA_BOOTSTRAPSERVERS=kafka:9093"
+    ports:
+      - 17700:17700
+
+networks:
+  default:
+    external:
+      name: ci
+

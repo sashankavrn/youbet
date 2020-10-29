@@ -1,0 +1,67 @@
+version: '3'
+
+services:
+  db:
+    restart: always
+    container_name: mariadb
+    image: mariadb:10.5
+    ports:
+      - "13306:13306"
+    environment:
+      MYSQL_DATABASE: playerdb
+      MYSQL_USER: player_service
+      MYSQL_PASSWORD: player2login
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: '%'
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: "/usr/bin/mysql --user=root --password=root --execute \"SHOW DATABASES;\""
+      interval: 2s
+      timeout: 20s
+      retries: 10
+networks:
+  default:
+    external:
+      name: staging
+
+
+#networks:
+#  staging:
+#    external: true
+#  ci:
+#    external: true
+
+#  registration-service:
+#    image: registration-service
+#    container_name: registration-service
+#    depends_on:
+#      - mariadb
+#    build: .
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:mysql://mariadb/youbetcha?useSSL=false&allowPublicKeyRetrieval=true
+#      SPRING_DATASOURCE_USERNAME: root
+#      SPRING_DATASOURCE_PASSWORD: root
+#      WAIT_HOSTS: mariadb:3306
+#    restart: always
+#    volumes:
+#      - ./logs:/usr/src/app/logs
+#    ports:
+#      - 17500:17500
+#
+#  nginx:
+#    image: nginx:latest
+#    container_name: nginx-registration
+#    restart: unless-stopped
+#    volumes:
+#      - ./logs:/var/log/nginx
+#      - ./nginx/registration-service.conf:/etc/nginx/conf.d/registration-service.conf:ro
+#      - ./nginx/certs/server.crt:/etc/pki/tls/certs/server.crt:ro
+#      - ./nginx/certs/server.key:/etc/pki/tls/private/server.key:ro
+#    ports:
+#      - 80:80
+#      - 443:443
+#    command: ['nginx-debug', '-g', 'daemon off;']
+#    links:
+#      - registration-service
+

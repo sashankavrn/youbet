@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: SVR-54-1
+      author: tomfin
+      changes:
+        - createTable:
+            tableName: game_ordering
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: order_number
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: game_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tag_id
+                  type: int
+                  constraints:
+                    nullable: true
+              - column:
+                  name: country_code
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+                    default: 'XX'
+              - column:
+                  name: created_date
+                  type: timestamp
+                  constraints:
+                    nullable: true

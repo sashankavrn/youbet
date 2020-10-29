@@ -1,0 +1,400 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: aegan
+      changes:
+        - createTable:
+            tableName: register
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+  - changeSet:
+      id: 2
+      author: mwlodarkiewicz
+      changes:
+        - addColumn:
+            tableName: register
+            columns:
+              - column:
+                  name: email
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: currency
+                  type: varchar(3)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: country
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: country_code
+                  type: varchar(2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: mobile_prefix
+                  type: varchar(5)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: mobile
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: birth_date
+                  type: varchar(15)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: city
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: address1
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: postal_code
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sign_up_ip
+                  type: varchar(15)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: security_question
+                  type: varchar(120)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: security_answer
+                  type: varchar(120)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: language
+                  type: varchar(2)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: allow_SMS_News_And_Offers
+                  type: varchar(1)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: allow_News_And_Offers
+                  type: varchar(1)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: current_status
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created_by
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created_date
+                  type: timestamp
+                  defaultValueComputed: current_timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_modified_by
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: last_modified_date
+                  type: timestamp
+                  defaultValueComputed: current_timestamp
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: login
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: success
+                  type: smallint
+                  constraints:
+                    nullable: true
+              - column:
+                  name: error_data_id
+                  type: bigint
+                  constraints:
+                    nullable: true
+              - column:
+                  name: timestamp
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: true
+              - column:
+                  name: version
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: first_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: language
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: last_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: registration_date
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created_date
+                  type: timestamp
+                  defaultValueComputed: current_timestamp
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: error_data
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: error_code
+                  type: smallint
+                  constraints:
+                    nullable: true
+              - column:
+                  name: error_message
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: log_id
+                  type: int
+                  constraints:
+                    nullable: true
+        - createTable:
+            tableName: error_details
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: error_detail
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+        - createTable:
+            tableName: error_data_error_details
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: error_data_id
+                  type: bigint
+                  constraints:
+                    nullable: true
+              - column:
+                  name: error_details_id
+                  type: bigint
+                  constraints:
+                    nullable: true
+        - addForeignKeyConstraint:
+            constraintName: fk_constraint_error_data_login
+            baseTableName: login
+            baseColumnNames: error_data_id
+            referencedTableName: error_data
+            referencedColumnNames: id
+  - changeSet:
+      id: 3
+      dbms: h2, mariadb, mysql
+      author: mwlodarkiewicz
+      changes:
+        - sql:
+            - sql: CREATE TABLE IF NOT EXISTS register_fail(id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+                user_name VARCHAR(50) NOT NULL,
+                response VARCHAR(1024));
+                CREATE TABLE IF NOT EXISTS login_fail(id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+                user_name VARCHAR(50) NOT NULL,
+                response VARCHAR(1024));
+  - changeSet:
+      id: 4
+      dbms: h2, mariadb, mysql
+      author: mwlodarkiewicz
+      changes:
+        - modifyDataType:
+            tableName: register
+            columnName: language
+            newDataType: varchar(5)
+  - changeSet:
+      id: 5
+      dbms: h2, mariadb, mysql
+      author: mwlodarkiewicz
+      changes:
+        - modifyDataType:
+            tableName: register
+            columnName: password
+            newDataType: varchar(255)
+  - changeSet:
+      id: 6
+      dbms: h2, mariadb, mysql
+      author: mwlodarkiewicz
+      changes:
+        - addUniqueConstraint:
+            columnNames: email
+            tableName: register
+  - changeSet:
+      id: 6
+      dbms: h2, mariadb, mysql
+      author: tomfin
+      changes:
+        - modifyDataType:
+            tableName: register
+            columnName: mobile_prefix
+            newDataType: varchar(10)
+  - changeSet:
+      id: 7
+      dbms: h2, mariadb, mysql
+      author: tomfin
+      changes:
+        - modifyDataType:
+            tableName: register
+            columnName: email
+            newDataType: varchar(255)
+  - changeSet:
+      id: 8
+      dbms: 'mariadb, mysql'
+      author: tomfin
+      changes:
+        - modifyDataType:
+            tableName: register
+            columnName: enabled
+            newDataType: tinyint(1)
+  - changeSet:
+      id: 9
+      dbms: 'mariadb, mysql'
+      author: tomfin
+      changes:
+        - modifyDataType:
+            tableName: register
+            columnName: bonus_opt_in
+            newDataType: tinyint(1)
+        - modifyDataType:
+            tableName: register
+            columnName: accept_terms_and_conditions
+            newDataType: tinyint(1)
+        - modifyDataType:
+            tableName: register
+            columnName: allow_SMS_News_And_Offers
+            newDataType: tinyint(1)
+        - modifyDataType:
+            tableName: register
+            columnName: allow_News_And_Offers
+            newDataType: tinyint(1)
+        - modifyDataType:
+            tableName: country
+            columnName: active
+            newDataType: tinyint(1)
+        - modifyDataType:
+            tableName: currency
+            columnName: active
+            newDataType: tinyint(1)
+        - modifyDataType:
+            tableName: language
+            columnName: active
+            newDataType: tinyint(1)
+
+  - changeSet:
+      id: 10
+      dbms: 'h2, mariadb, mysql'
+      author: tomfin
+      changes:
+        - dropNotNullConstraint:
+            tableName: register
+            columnDataType: varchar(255)
+            columnName: password
+
+  - changeSet:
+      id: 11
+      dbms: 'h2, mariadb, mysql'
+      author: tomfin
+      changes:
+        - dropNotNullConstraint:
+            tableName: register
+            columnDataType: varchar(20)
+            columnName: postal_code
+

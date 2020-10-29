@@ -1,0 +1,93 @@
+databaseChangeLog:
+  - changeSet:
+      id: svr20-1
+      author: aegan
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - createTable:
+            tableName: language
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: iso
+                  type: varchar(2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: active
+                  type: boolean
+                  constraints:
+                    nullable: false
+                  defaultValue: true
+              - column:
+                  name: created
+                  type: timestamp
+                  defaultValueComputed: current_timestamp
+                  constraints:
+                    nullable: false
+
+
+  - changeSet:
+      id:  svr20-2
+      author:  aegan
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - sqlFile:
+            encoding:  UTF-8
+            endDelimiter:  \nGO
+            path:  db/changelog/sql/language.sql
+            relativeToChangelogFile:  false
+            splitStatements:  true
+            stripComments:  true
+  - changeSet:
+      id:  svr20-3
+      author:  mwlodarkiewicz
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - renameColumn:
+            newColumnName:  locale
+            oldColumnName:  iso
+            columnDataType: varchar(8)
+            tableName:  language
+        - modifyDataType:
+            tableName: language
+            columnName: locale
+            newDataType: varchar(8)
+        - sql:
+            sql: >
+              UPDATE language SET active = false WHERE locale = 'ga';
+              UPDATE language SET active = false WHERE locale = 'es';
+              UPDATE language SET active = false WHERE locale = 'pt';
+              INSERT INTO language (locale, description, active) VALUES ('en_MT','English',true);
+              INSERT INTO language (locale, description, active) VALUES ('en_IN','English',true);
+              INSERT INTO language (locale, description, active) VALUES ('es_BZ','Español',true);
+  - changeSet:
+      id:  svr20-4
+      author:  mwlodarkiewicz
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - sql:
+            sql: >
+              INSERT INTO language (locale, description, active) VALUES ('en_MT','International English',true);
+              INSERT INTO language (locale, description, active) VALUES ('en_IN','Indian English',true);
+              INSERT INTO language (locale, description, active) VALUES ('es_BZ','Español Internacional',true);
+              INSERT INTO language (locale, description, active) VALUES ('en_CA','Canadian English',false);
+              INSERT INTO language (locale, description, active) VALUES ('es_MX','Español Mexicano',false);
+              INSERT INTO language (locale, description, active) VALUES ('es_AR','Español Argentino',false);
+              INSERT INTO language (locale, description, active) VALUES ('es_CL','Español Chileno',false);
+              INSERT INTO language (locale, description, active) VALUES ('pt_PT','Português Internacional',false);
+              INSERT INTO language (locale, description, active) VALUES ('pt_BR','Português Brasileiro',false);
+              INSERT INTO language (locale, description, active) VALUES ('ja_JP','日本語',false);
+              INSERT INTO language (locale, description, active) VALUES ('th_TH','ภาษาไทย',false);
+              INSERT INTO language (locale, description, active) VALUES ('ko_KW','한국어',false);

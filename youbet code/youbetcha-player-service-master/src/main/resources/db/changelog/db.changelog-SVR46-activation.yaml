@@ -1,0 +1,58 @@
+databaseChangeLog:
+  - changeSet:
+      id: svr46-1
+      author: mwlodarkiewicz
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - createTable:
+            tableName: verification_token
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: token
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: register_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: expiry_date
+                  type: timestamp
+                  defaultValueComputed: current_timestamp
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            constraintName: fk_verify_player
+            baseTableName: verification_token
+            baseColumnNames: register_id
+            referencedTableName: register
+            referencedColumnNames: id
+        - addColumn:
+            tableName: register
+            columns:
+              - column:
+                  name: enabled
+                  type: boolean
+                  defaultValue: false
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: svr46-2
+      author: mwlodarkiewicz
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - addForeignKeyConstraint:
+            constraintName: fk_verification_token_player
+            baseTableName: verification_token
+            baseColumnNames: register_id
+            referencedTableName: register
+            referencedColumnNames: id

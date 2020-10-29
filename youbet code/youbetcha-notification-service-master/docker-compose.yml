@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  youbetcha-notification-service:
+    image: youbetcha/youbetcha-notification-service:latest
+    container_name: youbetcha-notification-service
+    build: .
+    restart: always
+    volumes:
+      - /opt/app/youbetcha/youbetcha-notification-service/logs:/logs
+    ports:
+      - 17510:17510

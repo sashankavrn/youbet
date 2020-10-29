@@ -1,0 +1,111 @@
+databaseChangeLog:
+  - changeSet:
+      id: svr5-1
+      author: mwlodarkiewicz
+      changes:
+        - dropColumn:
+            columnName: country
+            tableName: register
+        - dropColumn:
+            columnName: username
+            tableName: register
+  - changeSet:
+      id: svr5-2
+      author: mwlodarkiewicz
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: user_name
+                  type: varchar(20)
+            tableName: register
+  - changeSet:
+      id: svr5-3
+      author: mwlodarkiewicz
+      changes:
+        - dropColumn:
+            columnName: sign_up_ip
+            tableName: register
+  - changeSet:
+      id: svr5-4
+      author: mwlodarkiewicz
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: signup_ip
+                  type: varchar(15)
+            tableName: register
+  - changeSet:
+      id: svr5-5
+      dbms: h2, mysql, mariadb
+      author: mwlodarkiewicz
+      changes:
+        - dropColumn:
+            tableName: register
+            columns:
+              - column:
+                  name: security_question
+              - column:
+                  name: security_answer
+              - column:
+                  name: user_name
+              - column:
+                  name: title
+  - changeSet:
+      id: svr5-6
+      dbms: h2, mysql, mariadb
+      author: mwlodarkiewicz
+      changes:
+        - addColumn:
+            tableName: register
+            columns:
+              - column:
+                  name: address2
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: bonus_opt_in
+                  type: boolean
+                  constraints:
+                    nullable: false
+                  defaultValue: true
+              - column:
+                  name: accept_terms_and_conditions
+                  type: boolean
+                  constraints:
+                    nullable: false
+                  defaultValue: true
+              - column:
+                  name: everymatrix_user_id
+                  type: int
+                  constraints:
+                    nullable: true
+  - changeSet:
+      id: svr5-7
+      dbms: h2, mysql, mariadb
+      author: mwlodarkiewicz
+      changes:
+        - dropColumn:
+            tableName: register
+            columns:
+              - column:
+                  name: allow_News_And_Offers
+              - column:
+                  name: allow_SMS_News_And_Offers
+        - addColumn:
+            tableName: register
+            columns:
+              - column:
+                  name: allow_SMS_News_And_Offers
+                  type: boolean
+                  constraints:
+                    nullable: false
+                  defaultValue: false
+              - column:
+                  name: allow_News_And_Offers
+                  type: boolean
+                  constraints:
+                    nullable: false
+                  defaultValue: false

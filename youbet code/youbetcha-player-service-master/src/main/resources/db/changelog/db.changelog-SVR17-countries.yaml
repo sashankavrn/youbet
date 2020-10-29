@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - changeSet:
+      id: svr17-1
+      author: aegan
+      dbms:  'h2,  mysql,  mariadb'
+      changes:
+        - createTable:
+            tableName: country
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: iso2
+                  type: varchar(2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: iso3
+                  type: varchar(3)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(5)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(80)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: svr17-2
+      author: mwlodarkiewicz
+      changes:
+        sqlFile:
+          encoding: UTF-8
+          endDelimiter: \nGO
+          path: db/changelog/sql/country.sql
+          relativeToChangelogFile: false
+          splitStatements: true
+          stripComments: true
+      dbms: "h2,  mysql,  mariadb"
+
+  - changeSet:
+      id: svr17-3
+      dbms: 'h2,  mysql,  mariadb'
+      author: tomfin
+      changes:
+        - addColumn:
+            tableName: country
+            columns:
+              - column:
+                  name: order_number
+                  type: int
+                  constraints:
+                    nullable: true
+                  defaultValue: 1000

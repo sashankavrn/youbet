@@ -1,0 +1,38 @@
+{
+  "domainID": 2207,
+  "type": "jackpot",
+  "action": "update",
+  "id": 40140000000,
+  "seq": 0,
+  "data": {
+    "id": 40140000000,
+    "vendor": "NetEnt",
+    "vendorID": 100,
+    "creation": {
+      "time": "2020-06-30T07:19:30.5113564Z"
+    },
+    "property": {
+      "mappedJackpotID": "arabian"
+    },
+    "type": "Global",
+    "contributions": {
+      "15933": {
+        "contribution": 0.05,
+        "calculateContribution": true
+      }
+    },
+    "games": {
+      "15933": true
+    },
+    "amounts": {
+      "EUR": 6905.47
+    },
+    "presentation": {
+      "jackpotName": {
+        "*": "Arabian Nights"
+      }
+    },
+    "hash": 3353089734080107645,
+    "hash2": 2253601085606488636
+  }
+}
